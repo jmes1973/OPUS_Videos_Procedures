@@ -15,7 +15,7 @@ def cargar_json(ruta: str | Path) -> dict[str, Any]:
 def guardar_json(ruta: str | Path, contenido: dict[str, Any]) -> None:
     ruta = Path(ruta)
     ruta.parent.mkdir(parents=True, exist_ok=True)
-    with ruta.open("w", encoding="utf-8-sig") as f:
+    with ruta.open("w", encoding="utf-8") as f:
         json.dump(contenido, f, ensure_ascii=False, indent=2)
 
 
@@ -26,8 +26,15 @@ def extraer_titulos_normalizados(terminology: dict[str, Any]) -> set[str]:
 def inferir_titulo_y_instruccion(
     sequence_label: str,
     sequence_summary: str,
+    is_ambiguous: bool,
     titulos_permitidos: set[str]
 ) -> tuple[str, str]:
+    if sequence_label == "valor" and is_ambiguous:
+        return (
+            "Revisar cambio de interfaz",
+            "Revise el cambio visible detectado en la interfaz y valide su significado antes de documentarlo."
+        )
+
     candidatos = {
         "panel": (
             "Abrir panel de ajustes",
@@ -60,8 +67,19 @@ def inferir_titulo_y_instruccion(
         ("Confirmar cambio visible", "Confirme el cambio visible observado en la interfaz.")
     )
 
-    if titulo not in titulos_permitidos:
+    titulos_fallback_permitidos = {
+        "Abrir panel de ajustes",
+        "Desplegar selector",
+        "Revisar mensaje del sistema",
+        "Ajustar control",
+        "Seleccionar opción",
+        "Confirmar cambio visible",
+        "Revisar cambio de interfaz"
+    }
+
+    if titulo not in titulos_permitidos and titulo not in titulos_fallback_permitidos:
         titulo = "Confirmar cambio visible"
+        instruccion = "Confirme el cambio visible observado en la interfaz."
 
     return titulo, instruccion
 
@@ -115,6 +133,7 @@ def construir_steps_normalized(
         titulo, instruccion = inferir_titulo_y_instruccion(
             sequence_label=sequence.get("sequence_label", "general"),
             sequence_summary=sequence.get("sequence_summary", ""),
+            is_ambiguous=bool(sequence.get("is_ambiguous", False)),
             titulos_permitidos=titulos_permitidos
         )
 
@@ -186,4 +205,3 @@ def crear_steps_normalized_desde_timeline(
     resultado["step_normalization_config"]["source_timeline_raw"] = str(timeline_raw_path)
     guardar_json(output_path, resultado)
     return resultado
-
