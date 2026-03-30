@@ -1,0 +1,40 @@
+﻿{
+  "video_id": "",
+  "run_id": "",
+  "source_video": "",
+  "generated_at": "",
+  "step_normalization_config": {
+    "source_timeline_raw": "",
+    "terminology_version": "",
+    "action_lexicon_version": "",
+    "allow_merge_sequences": true,
+    "max_step_duration_seconds": 0.0
+  },
+  "summary": {
+    "total_steps": 0,
+    "high_certainty_steps": 0,
+    "medium_certainty_steps": 0,
+    "low_certainty_steps": 0,
+    "manual_review_steps": 0
+  },
+  "steps": [
+    {
+      "step_id": "",
+      "step_order": 0,
+      "title": "",
+      "instruction": "",
+      "start_time": "",
+      "end_time": "",
+      "start_seconds": 0.0,
+      "end_seconds": 0.0,
+      "source_sequence_ids": [],
+      "source_event_ids": [],
+      "primary_frame": "",
+      "certainty": "",
+      "requires_manual_review": false,
+      "review_reason": "",
+      "technical_notes": "",
+      "excluded_from_guide": false
+    }
+  ]
+}
