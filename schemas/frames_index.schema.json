@@ -1,0 +1,25 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "frames_index",
+  "type": "object",
+  "properties": {
+    "video_id": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "frames": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "frame_id": { "type": "string" },
+          "timestamp": { "type": "string" },
+          "path": { "type": "string" },
+          "hash": { "type": "string" },
+          "is_keyframe": { "type": "boolean" },
+          "change_score": { "type": "number" }
+        },
+        "required": ["frame_id", "timestamp", "path"]
+      }
+    }
+  },
+  "required": ["video_id", "frames"]
+}

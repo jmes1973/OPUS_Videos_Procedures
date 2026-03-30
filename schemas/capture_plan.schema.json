@@ -1,0 +1,22 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "capture_plan",
+  "type": "object",
+  "properties": {
+    "video_id": { "type": "string" },
+    "captures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "capture_id": { "type": "string" },
+          "step_id": { "type": "string" },
+          "frame_id": { "type": "string" },
+          "reason": { "type": "string" }
+        },
+        "required": ["capture_id", "step_id", "frame_id"]
+      }
+    }
+  },
+  "required": ["video_id", "captures"]
+}

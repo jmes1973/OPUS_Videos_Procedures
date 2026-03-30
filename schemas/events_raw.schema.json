@@ -1,0 +1,29 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "events_raw",
+  "type": "object",
+  "properties": {
+    "video_id": { "type": "string" },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event_id": { "type": "string" },
+          "start_time": { "type": "string" },
+          "end_time": { "type": "string" },
+          "event_type": { "type": "string" },
+          "observable_action": { "type": "string" },
+          "evidence_frames": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "certainty": { "type": "string" },
+          "notes": { "type": "string" }
+        },
+        "required": ["event_id", "start_time", "event_type", "observable_action"]
+      }
+    }
+  },
+  "required": ["video_id", "events"]
+}

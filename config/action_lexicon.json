@@ -1,0 +1,14 @@
+﻿{
+  "acciones_permitidas": [
+    "inicio",
+    "abrir_panel",
+    "cerrar_panel",
+    "seleccionar_opcion",
+    "cambiar_selector",
+    "activar_control",
+    "desactivar_control",
+    "desplazar_slider",
+    "confirmar_cambio",
+    "error_visible"
+  ]
+}

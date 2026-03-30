@@ -1,0 +1,11 @@
+﻿{
+  "run_id": "",
+  "video_source": "",
+  "video_hash": "",
+  "started_at": "",
+  "finished_at": "",
+  "pipeline_version": "",
+  "prompt_versions": {},
+  "settings_snapshot": {},
+  "status": "pending"
+}
