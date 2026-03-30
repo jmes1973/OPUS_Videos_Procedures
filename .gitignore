@@ -1,0 +1,93 @@
+﻿# ==========================================
+# Entorno virtual
+# ==========================================
+.venv/
+venv/
+env/
+
+# ==========================================
+# Python
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+
+# Distribución / build
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Pytest / cobertura
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Herramientas
+.mypy_cache/
+.ruff_cache/
+.cache/
+
+# ==========================================
+# Variables de entorno / secretos
+# ==========================================
+.env
+.env.*
+!.env.example
+
+# ==========================================
+# Archivos del sistema / editor
+# ==========================================
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# ==========================================
+# Salidas del pipeline
+# ==========================================
+runs/run_*/
+output/
+data/cache/
+*.log
+
+# Frames e imágenes generadas
+input/samples/generated/
+**/frames/*.jpg
+**/frames/*.jpeg
+**/frames/*.png
+
+# Reportes y salidas temporales
+**/reports/*.tmp
+**/reports/*.bak
+
+# ==========================================
+# Documentos exportados pesados opcionales
+# Descomenta si no quieres versionarlos
+# ==========================================
+# guides_docx/
+# *.docx
+# *.pdf
+
+# ==========================================
+# Modelos locales / archivos grandes
+# ==========================================
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.bin
+
+# ==========================================
+# FFmpeg temporales
+# ==========================================
+*.wav
+*.tmp
+*.temp
