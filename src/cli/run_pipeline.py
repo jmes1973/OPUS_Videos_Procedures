@@ -6,6 +6,7 @@ import argparse
 import json
 import sys
 
+from src.extraction.frame_extractor import extraer_y_generar_frames_metadata
 from src.extraction.frames_indexer import crear_frames_index_desde_metadata
 from src.analysis.event_detector import crear_events_raw_desde_frames_index
 from src.analysis.timeline_builder import crear_timeline_raw_desde_events_raw
@@ -86,7 +87,7 @@ def main() -> int:
 
     parser.add_argument("--video-id", required=True, help="Identificador lógico del video.")
     parser.add_argument("--source-video", required=True, help="Ruta del video fuente.")
-    parser.add_argument("--frames-metadata", required=True, help="Ruta al JSON de metadatos de frames.")
+    parser.add_argument("--frames-metadata", required=False, default="", help="Ruta al JSON de metadatos de frames.")
     parser.add_argument("--terminology", default="config/terminology.json", help="Ruta a terminology.json.")
     parser.add_argument("--action-lexicon", default="config/action_lexicon.json", help="Ruta a action_lexicon.json.")
     parser.add_argument("--runs-dir", default="runs", help="Carpeta base de corridas.")
@@ -100,11 +101,23 @@ def main() -> int:
         runs_dir = Path(args.runs_dir)
         run_dir = crear_estructura_run(runs_dir, run_id)
 
+        frames_metadata_path = args.frames_metadata
+
+        if not frames_metadata_path:
+            print("[INFO] Extrayendo frames desde video real ...")
+            frames_metadata_path = str(
+                extraer_y_generar_frames_metadata(
+                    video_path=args.source_video,
+                    run_dir=run_dir,
+                    target_fps=args.target_fps
+                )
+            )
+
         crear_run_manifest(
             run_dir=run_dir,
             run_id=run_id,
             source_video=args.source_video,
-            frames_metadata_path=args.frames_metadata
+            frames_metadata_path=frames_metadata_path
         )
 
         frames_index_path = run_dir / "frames_index" / "frames_index.json"
@@ -114,7 +127,7 @@ def main() -> int:
         capture_plan_path = run_dir / "capture_plan" / "capture_plan.json"
 
         extraction_config = {
-            "mode": "metadata_precalculada",
+            "mode": "metadata_precalculada" if args.frames_metadata else "extraccion_desde_video_real",
             "target_fps": args.target_fps,
             "keyframe_detection": True,
             "diff_method": "precalculado",
@@ -129,7 +142,7 @@ def main() -> int:
             video_id=args.video_id,
             run_id=run_id,
             source_video=args.source_video,
-            frames_metadata_path=args.frames_metadata,
+            frames_metadata_path=frames_metadata_path,
             terminology_path=args.terminology,
             output_path=frames_index_path,
             extraction_config=extraction_config
