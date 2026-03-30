@@ -1,27 +1,30 @@
-﻿# ==========================================
-# Entorno virtual
-# ==========================================
+﻿# =========================================================
+# ENTORNOS Y DEPENDENCIAS LOCALES
+# =========================================================
 .venv/
 venv/
 env/
 
-# ==========================================
-# Python
-# ==========================================
+# =========================================================
+# PYTHON
+# =========================================================
 __pycache__/
 *.py[cod]
 *$py.class
 *.pyo
 *.pyd
 
-# Distribución / build
+# Build / empaquetado
 build/
 dist/
-*.egg-info/
 .eggs/
+*.egg-info/
 
-# Pytest / cobertura
+# Cachés y herramientas
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
 .coverage
 coverage.xml
 htmlcov/
@@ -29,65 +32,113 @@ htmlcov/
 # Jupyter
 .ipynb_checkpoints/
 
-# Herramientas
-.mypy_cache/
-.ruff_cache/
-.cache/
-
-# ==========================================
-# Variables de entorno / secretos
-# ==========================================
+# =========================================================
+# VARIABLES DE ENTORNO / SECRETOS
+# =========================================================
 .env
 .env.*
 !.env.example
 
-# ==========================================
-# Archivos del sistema / editor
-# ==========================================
+# =========================================================
+# EDITORES / SISTEMA
+# =========================================================
+.vscode/
+.idea/
 .DS_Store
 Thumbs.db
 desktop.ini
-.vscode/
-.idea/
 
-# ==========================================
-# Salidas del pipeline
-# ==========================================
-runs/run_*/
-output/
-data/cache/
+# =========================================================
+# LOGS Y TEMPORALES
+# =========================================================
 *.log
+*.tmp
+*.temp
+*.bak
 
-# Frames e imágenes generadas
-input/samples/generated/
-**/frames/*.jpg
-**/frames/*.jpeg
-**/frames/*.png
+# =========================================================
+# INPUT PESADO NO VERSIONABLE
+# Mantén estructura, pero no subas videos reales
+# =========================================================
+input/videos/*
+input/test_videos/*
+input/samples/*
 
-# Reportes y salidas temporales
-**/reports/*.tmp
-**/reports/*.bak
+# Conservar estructura vacía si usas .gitkeep
+!input/videos/.gitkeep
+!input/test_videos/.gitkeep
+!input/samples/.gitkeep
 
-# ==========================================
-# Documentos exportados pesados opcionales
-# Descomenta si no quieres versionarlos
-# ==========================================
-# guides_docx/
-# *.docx
-# *.pdf
+# =========================================================
+# OUTPUT LEGACY
+# Si todavía usas output/, ignóralo completo
+# =========================================================
+output/**
 
-# ==========================================
-# Modelos locales / archivos grandes
-# ==========================================
+# Si quieres conservar la estructura vacía con .gitkeep
+!output/.gitkeep
+!output/frames/.gitkeep
+!output/events_raw/.gitkeep
+!output/steps_normalized/.gitkeep
+!output/reports/.gitkeep
+!output/guides_docx/.gitkeep
+!output/logs/.gitkeep
+
+# =========================================================
+# RUNS GENERADOS
+# Conservar solo el template de referencia
+# =========================================================
+runs/run_*/
+runs/run_*/**
+!runs/_template_run/
+!runs/_template_run/**
+
+# =========================================================
+# FRAMES E IMÁGENES GENERADAS
+# =========================================================
+*.jpg
+*.jpeg
+*.png
+*.webp
+
+# =========================================================
+# DOCUMENTOS EXPORTADOS GENERADOS
+# =========================================================
+*.docx
+*.pdf
+*.md
+
+# Excepciones importantes
+!README.md
+!templates/reports/*.md
+!config/prompts/*.md
+
+# =========================================================
+# DATOS VOLÁTILES
+# =========================================================
+data/cache/**
+data/session_state.json
+!data/video_index.json
+
+# =========================================================
+# MODELOS / PESADOS
+# =========================================================
 *.ckpt
 *.pt
 *.pth
 *.onnx
 *.bin
+*.safetensors
 
-# ==========================================
-# FFmpeg temporales
-# ==========================================
+# =========================================================
+# AUDIO / EXTRACCIONES TEMPORALES
+# =========================================================
 *.wav
-*.tmp
-*.temp
+*.mp3
+
+# =========================================================
+# ARCHIVOS DE OFFICE TEMPORALES
+# =========================================================
+~$*.docx
+~$*.xlsx
+~$*.pptx
