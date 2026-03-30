@@ -1,0 +1,43 @@
+﻿{
+  "video_id": "",
+  "run_id": "",
+  "source_video": "",
+  "generated_at": "",
+  "extraction_config": {
+    "mode": "",
+    "target_fps": 0,
+    "keyframe_detection": false,
+    "diff_method": "",
+    "diff_threshold": 0.0,
+    "save_format": ""
+  },
+  "summary": {
+    "total_frames_indexed": 0,
+    "total_keyframes": 0,
+    "total_candidate_frames": 0,
+    "video_duration_seconds": 0.0,
+    "average_change_score": 0.0,
+    "max_change_score": 0.0
+  },
+  "frames": [
+    {
+      "frame_id": "",
+      "frame_number_source": null,
+      "timestamp": "",
+      "timestamp_seconds": 0.0,
+      "relative_position": 0.0,
+      "image_path": "",
+      "image_hash": "",
+      "width": 0,
+      "height": 0,
+      "extraction_type": "",
+      "is_keyframe": false,
+      "is_candidate": false,
+      "change_score_prev": 0.0,
+      "change_score_next": 0.0,
+      "duplicate_group": null,
+      "visual_flags": [],
+      "technical_notes": ""
+    }
+  ]
+}
