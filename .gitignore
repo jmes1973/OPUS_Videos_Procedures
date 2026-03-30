@@ -75,7 +75,7 @@ input/samples/*
 # =========================================================
 output/**
 
-# Si quieres conservar la estructura vacía con .gitkeep
+# Conservar estructura vacía si usas .gitkeep
 !output/.gitkeep
 !output/frames/.gitkeep
 !output/events_raw/.gitkeep
@@ -103,21 +103,24 @@ runs/run_*/**
 
 # =========================================================
 # DOCUMENTOS EXPORTADOS GENERADOS
+# Ignora salidas finales, pero conserva documentación fuente
 # =========================================================
 *.docx
 *.pdf
-*.md
 
-# Excepciones importantes
-!README.md
-!templates/reports/*.md
-!config/prompts/*.md
+!README.pdf
+
+# Si en el futuro generas guías markdown y no quieres versionarlas,
+# puedes ignorar una carpeta concreta en vez de todos los .md:
+# guides/**/*.md
 
 # =========================================================
 # DATOS VOLÁTILES
 # =========================================================
 data/cache/**
 data/session_state.json
+
+# Conservar índices base si forman parte del proyecto
 !data/video_index.json
 
 # =========================================================
