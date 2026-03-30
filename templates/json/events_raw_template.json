@@ -1,0 +1,40 @@
+﻿{
+  "video_id": "",
+  "run_id": "",
+  "source_video": "",
+  "generated_at": "",
+  "event_detection_config": {
+    "source_frames_index": "",
+    "event_types_version": "",
+    "analysis_rules_version": "",
+    "minimum_evidence_frames": 2,
+    "allow_ambiguous_events": true
+  },
+  "summary": {
+    "total_events": 0,
+    "high_certainty_events": 0,
+    "medium_certainty_events": 0,
+    "low_certainty_events": 0,
+    "ambiguous_events": 0
+  },
+  "events": [
+    {
+      "event_id": "",
+      "sequence_order": 0,
+      "start_time": "",
+      "end_time": "",
+      "start_seconds": 0.0,
+      "end_seconds": 0.0,
+      "event_type": "",
+      "observable_action": "",
+      "evidence_frames": [],
+      "primary_frame": "",
+      "certainty": "",
+      "is_ambiguous": false,
+      "ambiguity_reason": "",
+      "visual_flags": [],
+      "technical_notes": "",
+      "excluded_from_steps": false
+    }
+  ]
+}
