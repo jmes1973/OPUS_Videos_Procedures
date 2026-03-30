@@ -1,0 +1,103 @@
+﻿{
+  "language": "es",
+  "project": "OPUS",
+  "version": "1.1",
+  "normalization_policy": {
+    "single_language_output": true,
+    "deduplicate_by_term": true,
+    "preserve_visible_labels_as_aliases": true,
+    "prefer_spanish_normalized_terms": true,
+    "translate_visible_english_labels_to_spanish": true,
+    "allow_mixed_language_output": false
+  },
+  "marcas_visuales_permitidas": [
+    "cursor_presente",
+    "menu_visible",
+    "panel_visible",
+    "dialogo_visible",
+    "boton_resaltado",
+    "texto_superpuesto_visible",
+    "cambio_interfaz_visible",
+    "region_imagen_modificada",
+    "desplegable_visible",
+    "control_deslizante_visible",
+    "icono_visible",
+    "indicador_visible",
+    "imagen_ecografica_visible",
+    "modelo_3d_visible",
+    "cuadro_doppler_visible",
+    "barra_escala_visible"
+  ],
+  "niveles_certeza": [
+    "alta",
+    "media",
+    "baja"
+  ],
+  "acciones_observables_permitidas": [
+    "aparece_panel_lateral",
+    "desaparece_panel_lateral",
+    "se_despliega_menu",
+    "se_cierra_menu",
+    "se_resalta_boton",
+    "cambia_valor_visible",
+    "aparece_mensaje_error",
+    "aparece_mensaje_confirmacion",
+    "cambia_seleccion_visible",
+    "permanece_panel_visible",
+    "aparece_cuadro_dialogo",
+    "desaparece_cuadro_dialogo",
+    "se_activa_control_visible",
+    "se_desactiva_control_visible",
+    "se_modifica_imagen_ecografica",
+    "se_modifica_modelo_3d",
+    "aparece_indicador_rastreo",
+    "desaparece_indicador_rastreo",
+    "se_actualiza_lista_visible",
+    "se_inicia_descarga_visible",
+    "se_confirma_finalizacion_visible"
+  ],
+  "titulos_pasos_normalizados": [
+    "Abrir panel de ajustes",
+    "Cerrar panel de ajustes",
+    "Desplegar selector",
+    "Cerrar selector",
+    "Seleccionar opción",
+    "Ajustar control",
+    "Confirmar cambio visible",
+    "Activar función",
+    "Desactivar función",
+    "Revisar mensaje del sistema",
+    "Iniciar descarga",
+    "Finalizar ejercicio"
+  ],
+  "reglas_estilo": {
+    "idioma_salida": "español",
+    "permitir_mezcla_idiomas": false,
+    "usar_solo_terminos_canonicos_en_salida": true,
+    "traducir_textos_observados_en_ingles": true,
+    "eventos_crudos": {
+      "voz": "descriptiva objetiva",
+      "permitir_inferencia_intencion": false,
+      "permitir_inferencia_clinica": false,
+      "longitud_maxima_nota": 160
+    },
+    "pasos_normalizados": {
+      "voz": "instruccional tecnica",
+      "forma_verbal_preferida": "imperativo_formal",
+      "longitud_maxima_titulo": 60,
+      "longitud_maxima_instruccion": 220
+    }
+  },
+  "terminos_prohibidos": [
+    "ventanita",
+    "cosa",
+    "cosito",
+    "botoncito",
+    "seguramente",
+    "probablemente quiso",
+    "tal vez intento",
+    "parece que quiso",
+    "aparentemente buscaba"
+  ],
+  "categories": {}
+}
