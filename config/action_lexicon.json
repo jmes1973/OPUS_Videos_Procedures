@@ -1,14 +1,265 @@
 ﻿{
-  "acciones_permitidas": [
-    "inicio",
-    "abrir_panel",
-    "cerrar_panel",
-    "seleccionar_opcion",
-    "cambiar_selector",
-    "activar_control",
-    "desactivar_control",
-    "desplazar_slider",
-    "confirmar_cambio",
-    "error_visible"
+  "idioma": "es",
+  "version": "1.0",
+  "descripcion": "Lexico controlado de acciones observables permitidas para deteccion de eventos en videos de OPUS.",
+  "politica": {
+    "usar_solo_acciones_listadas": true,
+    "permitir_sinonimos_en_entrada": true,
+    "normalizar_siempre_a_canonico": true,
+    "permitir_salida_en_otro_idioma": false
+  },
+  "acciones": [
+    {
+      "id": "aparece_panel_lateral",
+      "canonico": "aparece_panel_lateral",
+      "etiqueta": "Aparece panel lateral",
+      "descripcion": "Se hace visible un panel lateral o flotante en la interfaz.",
+      "sinonimos_entrada": [
+        "se abre panel lateral",
+        "se muestra panel lateral",
+        "aparece panel flotante"
+      ],
+      "categoria": "paneles"
+    },
+    {
+      "id": "desaparece_panel_lateral",
+      "canonico": "desaparece_panel_lateral",
+      "etiqueta": "Desaparece panel lateral",
+      "descripcion": "Un panel lateral o flotante deja de estar visible.",
+      "sinonimos_entrada": [
+        "se cierra panel lateral",
+        "se oculta panel lateral",
+        "desaparece panel flotante"
+      ],
+      "categoria": "paneles"
+    },
+    {
+      "id": "se_despliega_menu",
+      "canonico": "se_despliega_menu",
+      "etiqueta": "Se despliega menú",
+      "descripcion": "Un menú desplegable pasa de estado oculto a visible.",
+      "sinonimos_entrada": [
+        "se abre menu",
+        "aparece menu desplegable",
+        "se muestra menu"
+      ],
+      "categoria": "menus"
+    },
+    {
+      "id": "se_cierra_menu",
+      "canonico": "se_cierra_menu",
+      "etiqueta": "Se cierra menú",
+      "descripcion": "Un menú desplegable deja de estar visible.",
+      "sinonimos_entrada": [
+        "se oculta menu",
+        "desaparece menu",
+        "se repliega menu"
+      ],
+      "categoria": "menus"
+    },
+    {
+      "id": "se_resalta_boton",
+      "canonico": "se_resalta_boton",
+      "etiqueta": "Se resalta botón",
+      "descripcion": "Un botón cambia de estado visual indicando foco, selección o activación.",
+      "sinonimos_entrada": [
+        "se ilumina boton",
+        "se marca boton",
+        "boton resaltado"
+      ],
+      "categoria": "controles"
+    },
+    {
+      "id": "cambia_valor_visible",
+      "canonico": "cambia_valor_visible",
+      "etiqueta": "Cambia valor visible",
+      "descripcion": "Se observa una modificación visible en un valor numérico, textual o gráfico.",
+      "sinonimos_entrada": [
+        "se modifica valor visible",
+        "cambia numero visible",
+        "se actualiza valor"
+      ],
+      "categoria": "valores"
+    },
+    {
+      "id": "aparece_mensaje_error",
+      "canonico": "aparece_mensaje_error",
+      "etiqueta": "Aparece mensaje de error",
+      "descripcion": "Se visualiza un mensaje de error o advertencia en la interfaz.",
+      "sinonimos_entrada": [
+        "se muestra error",
+        "aparece advertencia",
+        "mensaje de error visible"
+      ],
+      "categoria": "mensajes"
+    },
+    {
+      "id": "aparece_mensaje_confirmacion",
+      "canonico": "aparece_mensaje_confirmacion",
+      "etiqueta": "Aparece mensaje de confirmación",
+      "descripcion": "Se visualiza un mensaje de confirmación o resultado satisfactorio.",
+      "sinonimos_entrada": [
+        "se muestra confirmacion",
+        "aparece mensaje exitoso",
+        "mensaje de confirmacion visible"
+      ],
+      "categoria": "mensajes"
+    },
+    {
+      "id": "cambia_seleccion_visible",
+      "canonico": "cambia_seleccion_visible",
+      "etiqueta": "Cambia selección visible",
+      "descripcion": "Se observa un cambio visible en la opción seleccionada o activa.",
+      "sinonimos_entrada": [
+        "se modifica seleccion",
+        "cambia opcion activa",
+        "se actualiza seleccion visible"
+      ],
+      "categoria": "seleccion"
+    },
+    {
+      "id": "permanece_panel_visible",
+      "canonico": "permanece_panel_visible",
+      "etiqueta": "Permanece panel visible",
+      "descripcion": "El panel sigue visible entre frames consecutivos sin cierre.",
+      "sinonimos_entrada": [
+        "panel continua visible",
+        "panel sigue abierto",
+        "panel permanece abierto"
+      ],
+      "categoria": "paneles"
+    },
+    {
+      "id": "aparece_cuadro_dialogo",
+      "canonico": "aparece_cuadro_dialogo",
+      "etiqueta": "Aparece cuadro de diálogo",
+      "descripcion": "Se hace visible un cuadro de diálogo o ventana modal.",
+      "sinonimos_entrada": [
+        "se abre dialogo",
+        "aparece ventana modal",
+        "se muestra cuadro de dialogo"
+      ],
+      "categoria": "dialogos"
+    },
+    {
+      "id": "desaparece_cuadro_dialogo",
+      "canonico": "desaparece_cuadro_dialogo",
+      "etiqueta": "Desaparece cuadro de diálogo",
+      "descripcion": "Un cuadro de diálogo o ventana modal deja de estar visible.",
+      "sinonimos_entrada": [
+        "se cierra dialogo",
+        "se oculta ventana modal",
+        "desaparece dialogo"
+      ],
+      "categoria": "dialogos"
+    },
+    {
+      "id": "se_activa_control_visible",
+      "canonico": "se_activa_control_visible",
+      "etiqueta": "Se activa control visible",
+      "descripcion": "Un control cambia a estado activo con evidencia visual.",
+      "sinonimos_entrada": [
+        "control activado",
+        "se enciende control",
+        "control pasa a activo"
+      ],
+      "categoria": "controles"
+    },
+    {
+      "id": "se_desactiva_control_visible",
+      "canonico": "se_desactiva_control_visible",
+      "etiqueta": "Se desactiva control visible",
+      "descripcion": "Un control cambia a estado inactivo con evidencia visual.",
+      "sinonimos_entrada": [
+        "control desactivado",
+        "se apaga control",
+        "control pasa a inactivo"
+      ],
+      "categoria": "controles"
+    },
+    {
+      "id": "se_modifica_imagen_ecografica",
+      "canonico": "se_modifica_imagen_ecografica",
+      "etiqueta": "Se modifica imagen ecográfica",
+      "descripcion": "La imagen ecográfica visible cambia de forma apreciable.",
+      "sinonimos_entrada": [
+        "cambia imagen ecografica",
+        "se actualiza imagen ecografica",
+        "imagen ecografica modificada"
+      ],
+      "categoria": "imagen"
+    },
+    {
+      "id": "se_modifica_modelo_3d",
+      "canonico": "se_modifica_modelo_3d",
+      "etiqueta": "Se modifica modelo 3D",
+      "descripcion": "El modelo anatómico o volumétrico 3D cambia de forma visible.",
+      "sinonimos_entrada": [
+        "cambia modelo 3d",
+        "se actualiza modelo 3d",
+        "modelo 3d modificado"
+      ],
+      "categoria": "modelo_3d"
+    },
+    {
+      "id": "aparece_indicador_rastreo",
+      "canonico": "aparece_indicador_rastreo",
+      "etiqueta": "Aparece indicador de rastreo",
+      "descripcion": "Se visualiza un indicador relacionado con detección o pérdida de rastreo.",
+      "sinonimos_entrada": [
+        "aparece alerta de rastreo",
+        "se muestra indicador de rastreo",
+        "indicador de rastreo visible"
+      ],
+      "categoria": "rastreo"
+    },
+    {
+      "id": "desaparece_indicador_rastreo",
+      "canonico": "desaparece_indicador_rastreo",
+      "etiqueta": "Desaparece indicador de rastreo",
+      "descripcion": "Deja de mostrarse un indicador o alerta relacionada con el rastreo.",
+      "sinonimos_entrada": [
+        "se oculta indicador de rastreo",
+        "desaparece alerta de rastreo",
+        "se quita indicador de rastreo"
+      ],
+      "categoria": "rastreo"
+    },
+    {
+      "id": "se_actualiza_lista_visible",
+      "canonico": "se_actualiza_lista_visible",
+      "etiqueta": "Se actualiza lista visible",
+      "descripcion": "Una lista visible cambia su contenido, orden o selección.",
+      "sinonimos_entrada": [
+        "cambia lista visible",
+        "se refresca lista",
+        "lista actualizada"
+      ],
+      "categoria": "listas"
+    },
+    {
+      "id": "se_inicia_descarga_visible",
+      "canonico": "se_inicia_descarga_visible",
+      "etiqueta": "Se inicia descarga visible",
+      "descripcion": "Se evidencia visualmente el inicio de una descarga o transferencia.",
+      "sinonimos_entrada": [
+        "comienza descarga",
+        "se muestra descarga en curso",
+        "descarga iniciada"
+      ],
+      "categoria": "descargas"
+    },
+    {
+      "id": "se_confirma_finalizacion_visible",
+      "canonico": "se_confirma_finalizacion_visible",
+      "etiqueta": "Se confirma finalización visible",
+      "descripcion": "Se muestra visualmente la confirmación de finalización de una acción o ejercicio.",
+      "sinonimos_entrada": [
+        "aparece confirmacion de finalizacion",
+        "se muestra finalizacion",
+        "finalizacion confirmada"
+      ],
+      "categoria": "finalizacion"
+    }
   ]
 }
