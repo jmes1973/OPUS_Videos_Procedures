@@ -5,29 +5,23 @@ from typing import Any
 from hashlib import sha1
 import subprocess
 import json
-import math
+
+from PIL import Image, ImageChops, ImageStat
 
 
 def ejecutar_comando(comando: list[str]) -> subprocess.CompletedProcess:
-    return subprocess.run(
-        comando,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-        check=True
-    )
-
-
-def obtener_duracion_video(video_path: str | Path) -> float:
-    comando = [
-        "ffprobe",
-        "-v", "error",
-        "-show_entries", "format=duration",
-        "-of", "default=noprint_wrappers=1:nokey=1",
-        str(video_path)
-    ]
-    resultado = ejecutar_comando(comando)
-    return float(resultado.stdout.strip())
+    try:
+        return subprocess.run(
+            comando,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=True
+        )
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(
+            f"Error ejecutando comando: {' '.join(comando)}\n\nSTDOUT:\n{e.stdout}\n\nSTDERR:\n{e.stderr}"
+        ) from e
 
 
 def extraer_frames_uniformes(
@@ -59,17 +53,70 @@ def calcular_hash_archivo(ruta: str | Path) -> str:
     return sha1(contenido).hexdigest()[:12]
 
 
+def obtener_dimensiones_imagen(ruta: str | Path) -> tuple[int, int]:
+    with Image.open(ruta) as img:
+        return img.size
+
+
+def calcular_diferencia_entre_imagenes(
+    ruta_anterior: str | Path,
+    ruta_actual: str | Path
+) -> float:
+    with Image.open(ruta_anterior) as img1, Image.open(ruta_actual) as img2:
+        img1 = img1.convert("RGB")
+        img2 = img2.convert("RGB")
+
+        if img1.size != img2.size:
+            img2 = img2.resize(img1.size)
+
+        diff = ImageChops.difference(img1, img2)
+        stat = ImageStat.Stat(diff)
+
+        media_canales = stat.mean
+        media_global = sum(media_canales) / len(media_canales)
+
+        return round(media_global / 255.0, 4)
+
+
+def inferir_visual_flags_basicos(
+    change_score_prev: float,
+    umbral_cambio_visible: float
+) -> list[str]:
+    flags: list[str] = []
+
+    if change_score_prev >= umbral_cambio_visible:
+        flags.append("cambio_interfaz_visible")
+
+    return flags
+
+
 def construir_frames_metadata_desde_frames(
     frame_paths: list[Path],
-    run_frames_dir: str | Path,
-    target_fps: float
+    target_fps: float,
+    umbral_candidato: float = 0.08,
+    umbral_keyframe: float = 0.18,
+    umbral_cambio_visible: float = 0.10
 ) -> list[dict[str, Any]]:
     metadata: list[dict[str, Any]] = []
-
     intervalo = 1.0 / target_fps if target_fps > 0 else 1.0
+
+    frame_anterior: Path | None = None
 
     for i, frame_path in enumerate(frame_paths):
         timestamp_seconds = round(i * intervalo, 4)
+        width, height = obtener_dimensiones_imagen(frame_path)
+
+        if frame_anterior is None:
+            change_score_prev = 0.0
+        else:
+            change_score_prev = calcular_diferencia_entre_imagenes(frame_anterior, frame_path)
+
+        is_candidate = change_score_prev >= umbral_candidato or i == 0
+        is_keyframe = change_score_prev >= umbral_keyframe
+        visual_flags = inferir_visual_flags_basicos(
+            change_score_prev=change_score_prev,
+            umbral_cambio_visible=umbral_cambio_visible
+        )
 
         metadata.append({
             "frame_id": f"frame_{i+1:06d}",
@@ -77,17 +124,22 @@ def construir_frames_metadata_desde_frames(
             "timestamp_seconds": timestamp_seconds,
             "image_path": str(frame_path).replace("\\", "/"),
             "image_hash": calcular_hash_archivo(frame_path),
-            "width": 0,
-            "height": 0,
+            "width": width,
+            "height": height,
             "extraction_type": "uniform",
-            "is_keyframe": False,
-            "is_candidate": True,
-            "change_score_prev": 0.0 if i == 0 else 0.2,
+            "is_keyframe": is_keyframe,
+            "is_candidate": is_candidate,
+            "change_score_prev": change_score_prev,
             "change_score_next": 0.0,
             "duplicate_group": None,
-            "visual_flags": [],
+            "visual_flags": visual_flags,
             "technical_notes": "Frame extraído automáticamente desde video real."
         })
+
+        frame_anterior = frame_path
+
+    for i in range(len(metadata) - 1):
+        metadata[i]["change_score_next"] = metadata[i + 1]["change_score_prev"]
 
     return metadata
 
@@ -102,12 +154,15 @@ def guardar_json(ruta: str | Path, contenido: Any) -> None:
 def extraer_y_generar_frames_metadata(
     video_path: str | Path,
     run_dir: str | Path,
-    target_fps: float
+    target_fps: float,
+    umbral_candidato: float = 0.08,
+    umbral_keyframe: float = 0.18,
+    umbral_cambio_visible: float = 0.10
 ) -> Path:
     run_dir = Path(run_dir)
     frames_dir = run_dir / "frames"
-    cache_dir = run_dir / "logs"
-    cache_dir.mkdir(parents=True, exist_ok=True)
+    logs_dir = run_dir / "logs"
+    logs_dir.mkdir(parents=True, exist_ok=True)
 
     frame_paths = extraer_frames_uniformes(
         video_path=video_path,
@@ -117,10 +172,12 @@ def extraer_y_generar_frames_metadata(
 
     metadata = construir_frames_metadata_desde_frames(
         frame_paths=frame_paths,
-        run_frames_dir=frames_dir,
-        target_fps=target_fps
+        target_fps=target_fps,
+        umbral_candidato=umbral_candidato,
+        umbral_keyframe=umbral_keyframe,
+        umbral_cambio_visible=umbral_cambio_visible
     )
 
-    metadata_path = run_dir / "logs" / "frames_metadata_generated.json"
+    metadata_path = logs_dir / "frames_metadata_generated.json"
     guardar_json(metadata_path, metadata)
     return metadata_path
