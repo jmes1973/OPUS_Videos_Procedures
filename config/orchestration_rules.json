@@ -1,0 +1,34 @@
+﻿{
+  "version": "1.0",
+  "idioma_salida": "es",
+  "politica_general": {
+    "ejecutar_capa_1_siempre": true,
+    "permitir_escalamiento_capa_2": true,
+    "permitir_salida_generica_si_no_hay_confianza": true,
+    "permitir_alucinacion": false
+  },
+  "umbrales": {
+    "confianza_minima_sin_escalar": 0.8,
+    "confianza_minima_evento_especifico": 0.75,
+    "ocr_calidad_minima": 0.65
+  },
+  "criterios_escalamiento": {
+    "evento_demasiado_generico": true,
+    "cambio_visual_relevante_sin_clasificacion": true,
+    "ocr_insuficiente": true,
+    "conflicto_entre_reglas": true,
+    "impacto_alto_en_guia_final": true
+  },
+  "criterios_no_escalar": {
+    "coincidencia_fuerte_con_patron_conocido": true,
+    "ocr_claro_y_estable": true,
+    "estructura_visual_coherente": true,
+    "clasificacion_preliminar_especifica": true
+  },
+  "patrones_prioritarios": [
+    "apertura_cuadro_inicio_sesion",
+    "estado_procesamiento",
+    "sesion_iniciada",
+    "apertura_panel_perfil"
+  ]
+}
