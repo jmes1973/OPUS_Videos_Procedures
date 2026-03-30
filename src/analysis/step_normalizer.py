@@ -8,14 +8,14 @@ import json
 
 def cargar_json(ruta: str | Path) -> dict[str, Any]:
     ruta = Path(ruta)
-    with ruta.open("r", encoding="utf-8") as f:
+    with ruta.open("r", encoding="utf-8-sig") as f:
         return json.load(f)
 
 
 def guardar_json(ruta: str | Path, contenido: dict[str, Any]) -> None:
     ruta = Path(ruta)
     ruta.parent.mkdir(parents=True, exist_ok=True)
-    with ruta.open("w", encoding="utf-8") as f:
+    with ruta.open("w", encoding="utf-8-sig") as f:
         json.dump(contenido, f, ensure_ascii=False, indent=2)
 
 
@@ -186,3 +186,4 @@ def crear_steps_normalized_desde_timeline(
     resultado["step_normalization_config"]["source_timeline_raw"] = str(timeline_raw_path)
     guardar_json(output_path, resultado)
     return resultado
+

@@ -99,5 +99,196 @@
     "parece que quiso",
     "aparentemente buscaba"
   ],
-  "categories": {}
+  "categories": {
+    "marca_y_plataforma": [
+      {
+        "term": "Volutracer OPUS",
+        "description": "Nombre del sistema o plataforma principal."
+      },
+      {
+        "term": "OPUS Academy",
+        "description": "Marca institucional de la plataforma educativa."
+      }
+    ],
+    "acceso_y_sesion": [
+      {
+        "term": "Pantalla de inicio",
+        "description": "Muestra el menú principal de acceso a las distintas áreas de la aplicación.",
+        "aliases": ["Start screen"]
+      },
+      {
+        "term": "Iniciar sesión",
+        "description": "Permite iniciar sesión en la plataforma.",
+        "aliases": ["Sign in", "Sign In"]
+      },
+      {
+        "term": "Cerrar sesión",
+        "description": "Cierra la sesión del usuario en la aplicación.",
+        "aliases": ["Sign out", "Sign Out", "Desconectar"]
+      },
+      {
+        "term": "Crear cuenta",
+        "description": "Redirige al formulario de registro para crear una cuenta nueva.",
+        "aliases": ["Create account"]
+      },
+      {
+        "term": "Recuperar contraseña",
+        "description": "Inicia el proceso de recuperación de contraseña por correo electrónico.",
+        "aliases": ["Forgot Password?"]
+      },
+      {
+        "term": "Sesión activa",
+        "description": "Estado en que un usuario ha iniciado sesión y tiene acceso a la plataforma."
+      },
+      {
+        "term": "Autenticación exitosa",
+        "description": "Confirmación de que las credenciales del usuario fueron verificadas correctamente."
+      },
+      {
+        "term": "Usuario",
+        "description": "Identificador del usuario autenticado o del campo de acceso."
+      },
+      {
+        "term": "Nombre de usuario",
+        "description": "Campo donde el usuario ingresa su identificador de acceso, habitualmente el correo electrónico.",
+        "aliases": ["Username", "Username (email)"]
+      },
+      {
+        "term": "Contraseña",
+        "description": "Campo donde el usuario ingresa su clave de acceso de forma oculta.",
+        "aliases": ["Password"]
+      },
+      {
+        "term": "Prellenado",
+        "description": "Estado de un campo que ya contiene datos guardados de una sesión anterior."
+      }
+    ],
+    "navegacion_general": [
+      {
+        "term": "Menú principal",
+        "description": "Reúne las opciones de navegación generales disponibles al abrir OPUS."
+      },
+      {
+        "term": "Mis Cursos",
+        "description": "Biblioteca personal de cursos del usuario.",
+        "aliases": ["My Courses"]
+      },
+      {
+        "term": "Ensembles",
+        "description": "Da acceso a conjuntos o paquetes de cursos agrupados."
+      },
+      {
+        "term": "Nube",
+        "description": "Permite acceder a funciones o contenidos vinculados a la nube.",
+        "aliases": ["Cloud"]
+      },
+      {
+        "term": "Estilo Libre",
+        "description": "Abre el modo libre de exploración o práctica sin flujo guiado estricto.",
+        "aliases": ["Freestyle"]
+      },
+      {
+        "term": "Académico",
+        "description": "Módulo o área académica de la plataforma."
+      },
+      {
+        "term": "Administración",
+        "description": "Módulo o área administrativa de la plataforma."
+      },
+      {
+        "term": "Atrás",
+        "description": "Regresa a la pantalla o vista anterior.",
+        "aliases": ["Back"]
+      },
+      {
+        "term": "Info",
+        "description": "Abre información contextual o informativa del sistema o módulo."
+      },
+      {
+        "term": "Ayuda",
+        "description": "Despliega ayuda o asistencia para el usuario.",
+        "aliases": ["Help"]
+      },
+      {
+        "term": "Salir",
+        "description": "Cierra la ventana o sale de la aplicación, según el contexto.",
+        "aliases": ["Exit", "X / Exit"]
+      }
+    ],
+    "regiones_y_componentes_ui": [
+      {
+        "term": "Barra superior",
+        "description": "Franja horizontal con controles globales de navegación, estado o salida."
+      },
+      {
+        "term": "Barra de navegación",
+        "description": "Franja superior con controles globales de la aplicación."
+      },
+      {
+        "term": "Barra de estado",
+        "description": "Muestra el estado de procesamiento u operación del sistema."
+      },
+      {
+        "term": "Barra inferior",
+        "description": "Reúne herramientas de exploración, anotación y control del ejercicio."
+      },
+      {
+        "term": "Menú lateral",
+        "description": "Panel vertical a la izquierda que agrupa las opciones principales de navegación."
+      },
+      {
+        "term": "Panel lateral izquierdo",
+        "description": "Panel izquierdo con la lista de cursos u opciones de navegación."
+      },
+      {
+        "term": "Panel izquierdo",
+        "description": "Contiene la imagen ecográfica principal o la lista de cursos, según el contexto."
+      },
+      {
+        "term": "Panel derecho",
+        "description": "Muestra el detalle del curso o el modelo 3D/anatomía, según el contexto."
+      },
+      {
+        "term": "Ventana",
+        "description": "Área delimitada de la interfaz que contiene información o controles específicos."
+      },
+      {
+        "term": "Ventana modal",
+        "description": "Ventana emergente que se superpone a la pantalla principal sin reemplazarla.",
+        "aliases": ["Modal", "Overlay", "Modal / Overlay", "Cuadro de diálogo"]
+      },
+      {
+        "term": "Panel flotante",
+        "description": "Superpone temporalmente controles sobre la interfaz principal sin cambiar de pantalla."
+      },
+      {
+        "term": "Panel de detalle",
+        "description": "Muestra metadatos del curso y sus módulos o actividades disponibles."
+      },
+      {
+        "term": "Panel de detalle del curso",
+        "description": "Muestra la información del curso seleccionado mientras se configura el filtrado."
+      },
+      {
+        "term": "Tarjeta de perfil",
+        "description": "Panel que muestra el resumen de datos e información personal del usuario autenticado."
+      },
+      {
+        "term": "Barra de herramientas",
+        "description": "Conjunto de botones funcionales en una zona de trabajo."
+      },
+      {
+        "term": "Indicador de actividad",
+        "description": "Elemento visual que notifica que el sistema está procesando una tarea."
+      },
+      {
+        "term": "Fondo atenuado",
+        "description": "Efecto visual que oscurece o difumina el contenido detrás de un modal para destacarlo."
+      },
+      {
+        "term": "Superposición de capas",
+        "description": "Coexistencia visual de la interfaz base con paneles y menús emergentes abiertos al mismo tiempo."
+      }
+    ]
+  }
 }
