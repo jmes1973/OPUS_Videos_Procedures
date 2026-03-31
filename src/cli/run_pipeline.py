@@ -6,12 +6,12 @@ import argparse
 import json
 import sys
 
-from src.extraction.frame_extractor import extraer_y_generar_frames_metadata
 from src.extraction.frames_indexer import crear_frames_index_desde_metadata
 from src.analysis.event_detector import crear_events_raw_desde_frames_index
 from src.analysis.timeline_builder import crear_timeline_raw_desde_events_raw
 from src.analysis.step_normalizer import crear_steps_normalized_desde_timeline
 from src.analysis.capture_selector import crear_capture_plan_desde_steps
+from src.extraction.frame_extractor import extraer_y_generar_frames_metadata
 
 
 def guardar_json(ruta: str | Path, contenido: dict) -> None:
@@ -111,7 +111,7 @@ def main() -> int:
                     run_dir=run_dir,
                     target_fps=args.target_fps
                 )
-            )
+            )        
 
         crear_run_manifest(
             run_dir=run_dir,
@@ -127,7 +127,7 @@ def main() -> int:
         capture_plan_path = run_dir / "capture_plan" / "capture_plan.json"
 
         extraction_config = {
-            "mode": "metadata_precalculada" if args.frames_metadata else "extraccion_desde_video_real",
+            "mode": "metadata_precalculada",
             "target_fps": args.target_fps,
             "keyframe_detection": True,
             "diff_method": "precalculado",

@@ -16,7 +16,7 @@ def cargar_json(ruta: str | Path) -> dict[str, Any]:
 def guardar_json(ruta: str | Path, contenido: dict[str, Any]) -> None:
     ruta = Path(ruta)
     ruta.parent.mkdir(parents=True, exist_ok=True)
-    with ruta.open("w", encoding="utf-8-sig") as f:
+    with ruta.open("w", encoding="utf-8") as f:
         json.dump(contenido, f, ensure_ascii=False, indent=2)
 
 
@@ -230,4 +230,3 @@ def crear_frames_index_desde_metadata(
 
     guardar_json(output_path, resultado)
     return resultado
-

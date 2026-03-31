@@ -1,30 +1,27 @@
-﻿# =========================================================
-# ENTORNOS Y DEPENDENCIAS LOCALES
-# =========================================================
+# ==========================================
+# Entorno virtual
+# ==========================================
 .venv/
 venv/
 env/
 
-# =========================================================
-# PYTHON
-# =========================================================
+# ==========================================
+# Python
+# ==========================================
 __pycache__/
 *.py[cod]
 *$py.class
 *.pyo
 *.pyd
 
-# Build / empaquetado
+# Distribución / build
 build/
 dist/
-.eggs/
 *.egg-info/
+.eggs/
 
-# Cachés y herramientas
+# Pytest / cobertura
 .pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.cache/
 .coverage
 coverage.xml
 htmlcov/
@@ -32,116 +29,65 @@ htmlcov/
 # Jupyter
 .ipynb_checkpoints/
 
-# =========================================================
-# VARIABLES DE ENTORNO / SECRETOS
-# =========================================================
+# Herramientas
+.mypy_cache/
+.ruff_cache/
+.cache/
+
+# ==========================================
+# Variables de entorno / secretos
+# ==========================================
 .env
 .env.*
 !.env.example
 
-# =========================================================
-# EDITORES / SISTEMA
-# =========================================================
-.vscode/
-.idea/
+# ==========================================
+# Archivos del sistema / editor
+# ==========================================
 .DS_Store
 Thumbs.db
 desktop.ini
+.vscode/
+.idea/
 
-# =========================================================
-# LOGS Y TEMPORALES
-# =========================================================
-*.log
-*.tmp
-*.temp
-*.bak
-
-# =========================================================
-# INPUT PESADO NO VERSIONABLE
-# Mantén estructura, pero no subas videos reales
-# =========================================================
-input/videos/*
-input/test_videos/*
-input/samples/*
-
-# Conservar estructura vacía si usas .gitkeep
-!input/videos/.gitkeep
-!input/test_videos/.gitkeep
-!input/samples/.gitkeep
-
-# =========================================================
-# OUTPUT LEGACY
-# Si todavía usas output/, ignóralo completo
-# =========================================================
-output/**
-
-# Conservar estructura vacía si usas .gitkeep
-!output/.gitkeep
-!output/frames/.gitkeep
-!output/events_raw/.gitkeep
-!output/steps_normalized/.gitkeep
-!output/reports/.gitkeep
-!output/guides_docx/.gitkeep
-!output/logs/.gitkeep
-
-# =========================================================
-# RUNS GENERADOS
-# Conservar solo el template de referencia
-# =========================================================
+# ==========================================
+# Salidas del pipeline
+# ==========================================
 runs/run_*/
-runs/run_*/**
-!runs/_template_run/
-!runs/_template_run/**
+output/
+data/cache/
+*.log
 
-# =========================================================
-# FRAMES E IMÁGENES GENERADAS
-# =========================================================
-*.jpg
-*.jpeg
-*.png
-*.webp
+# Frames e imágenes generadas
+input/samples/generated/
+**/frames/*.jpg
+**/frames/*.jpeg
+**/frames/*.png
 
-# =========================================================
-# DOCUMENTOS EXPORTADOS GENERADOS
-# Ignora salidas finales, pero conserva documentación fuente
-# =========================================================
-*.docx
-*.pdf
+# Reportes y salidas temporales
+**/reports/*.tmp
+**/reports/*.bak
 
-!README.pdf
+# ==========================================
+# Documentos exportados pesados opcionales
+# Descomenta si no quieres versionarlos
+# ==========================================
+# guides_docx/
+# *.docx
+# *.pdf
 
-# Si en el futuro generas guías markdown y no quieres versionarlas,
-# puedes ignorar una carpeta concreta en vez de todos los .md:
-# guides/**/*.md
-
-# =========================================================
-# DATOS VOLÁTILES
-# =========================================================
-data/cache/**
-data/session_state.json
-
-# Conservar índices base si forman parte del proyecto
-!data/video_index.json
-
-# =========================================================
-# MODELOS / PESADOS
-# =========================================================
+# ==========================================
+# Modelos locales / archivos grandes
+# ==========================================
 *.ckpt
 *.pt
 *.pth
 *.onnx
 *.bin
-*.safetensors
 
-# =========================================================
-# AUDIO / EXTRACCIONES TEMPORALES
-# =========================================================
+# ==========================================
+# FFmpeg temporales
+# ==========================================
 *.wav
-*.mp3
-
-# =========================================================
-# ARCHIVOS DE OFFICE TEMPORALES
-# =========================================================
-~$*.docx
-~$*.xlsx
-~$*.pptx
+*.tmp
+*.temp

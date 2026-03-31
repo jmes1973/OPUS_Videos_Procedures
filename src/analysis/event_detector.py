@@ -37,7 +37,7 @@ def inferir_certeza(
 
     if len(evidencia_frames) >= 2:
         puntuacion += 1
-    if change_score >= 0.03:
+    if change_score >= 0.35:
         puntuacion += 1
     if is_keyframe:
         puntuacion += 1
@@ -104,8 +104,8 @@ def detectar_eventos_desde_frames(
             "generated_at": datetime.now().isoformat(timespec="seconds"),
             "event_detection_config": {
                 "source_frames_index": "",
-                "event_types_version": "1.2",
-                "analysis_rules_version": "1.2",
+                "event_types_version": "1.0",
+                "analysis_rules_version": "1.0",
                 "minimum_evidence_frames": 2,
                 "allow_ambiguous_events": True
             },
@@ -134,10 +134,6 @@ def detectar_eventos_desde_frames(
         is_keyframe = bool(actual.get("is_keyframe", False))
         is_candidate = bool(actual.get("is_candidate", False))
 
-        evidencia = [anterior["frame_id"], actual["frame_id"]]
-        certeza = inferir_certeza(evidencia, change_score, is_keyframe)
-        flags_union = sorted(list((marcas_anteriores | marcas_actuales) & marcas_permitidas))
-
         evento_detectado = None
 
         if "panel_visible" in nuevas_marcas and "aparece_panel_lateral" in acciones_validas:
@@ -148,12 +144,28 @@ def detectar_eventos_desde_frames(
                 end_frame=actual,
                 event_type="transicion_interfaz",
                 observable_action="aparece_panel_lateral",
-                evidence_frames=evidencia,
-                certainty=certeza,
-                is_ambiguous=certeza == "baja",
-                ambiguity_reason="Detección con evidencia limitada." if certeza == "baja" else "",
-                visual_flags=flags_union,
+                evidence_frames=[anterior["frame_id"], actual["frame_id"]],
+                certainty=inferir_certeza([anterior["frame_id"], actual["frame_id"]], change_score, is_keyframe),
+                is_ambiguous=False,
+                ambiguity_reason="",
+                visual_flags=sorted(list((marcas_anteriores | marcas_actuales) & marcas_permitidas)),
                 technical_notes="Se observa transición hacia un panel visible."
+            )
+
+        elif "panel_visible" in marcas_perdidas and "desaparece_panel_lateral" in acciones_validas:
+            evento_detectado = crear_evento(
+                event_id=f"evt_{contador_eventos:04d}",
+                sequence_order=contador_eventos,
+                start_frame=anterior,
+                end_frame=actual,
+                event_type="transicion_interfaz",
+                observable_action="desaparece_panel_lateral",
+                evidence_frames=[anterior["frame_id"], actual["frame_id"]],
+                certainty=inferir_certeza([anterior["frame_id"], actual["frame_id"]], change_score, is_keyframe),
+                is_ambiguous=False,
+                ambiguity_reason="",
+                visual_flags=sorted(list((marcas_anteriores | marcas_actuales) & marcas_permitidas)),
+                technical_notes="El panel deja de estar visible."
             )
 
         elif "desplegable_visible" in nuevas_marcas and "se_despliega_menu" in acciones_validas:
@@ -164,12 +176,28 @@ def detectar_eventos_desde_frames(
                 end_frame=actual,
                 event_type="cambio_menu",
                 observable_action="se_despliega_menu",
-                evidence_frames=evidencia,
-                certainty=certeza,
-                is_ambiguous=certeza == "baja",
-                ambiguity_reason="Detección con evidencia limitada." if certeza == "baja" else "",
-                visual_flags=flags_union,
+                evidence_frames=[anterior["frame_id"], actual["frame_id"]],
+                certainty=inferir_certeza([anterior["frame_id"], actual["frame_id"]], change_score, is_keyframe),
+                is_ambiguous=False,
+                ambiguity_reason="",
+                visual_flags=sorted(list((marcas_anteriores | marcas_actuales) & marcas_permitidas)),
                 technical_notes="Se hace visible un menú desplegable."
+            )
+
+        elif "desplegable_visible" in marcas_perdidas and "se_cierra_menu" in acciones_validas:
+            evento_detectado = crear_evento(
+                event_id=f"evt_{contador_eventos:04d}",
+                sequence_order=contador_eventos,
+                start_frame=anterior,
+                end_frame=actual,
+                event_type="cambio_menu",
+                observable_action="se_cierra_menu",
+                evidence_frames=[anterior["frame_id"], actual["frame_id"]],
+                certainty=inferir_certeza([anterior["frame_id"], actual["frame_id"]], change_score, is_keyframe),
+                is_ambiguous=False,
+                ambiguity_reason="",
+                visual_flags=sorted(list((marcas_anteriores | marcas_actuales) & marcas_permitidas)),
+                technical_notes="El menú desplegable deja de estar visible."
             )
 
         elif "dialogo_visible" in nuevas_marcas and "aparece_cuadro_dialogo" in acciones_validas:
@@ -180,38 +208,71 @@ def detectar_eventos_desde_frames(
                 end_frame=actual,
                 event_type="dialogo",
                 observable_action="aparece_cuadro_dialogo",
-                evidence_frames=evidencia,
-                certainty=certeza,
-                is_ambiguous=certeza == "baja",
-                ambiguity_reason="Detección con evidencia limitada." if certeza == "baja" else "",
-                visual_flags=flags_union,
+                evidence_frames=[anterior["frame_id"], actual["frame_id"]],
+                certainty=inferir_certeza([anterior["frame_id"], actual["frame_id"]], change_score, is_keyframe),
+                is_ambiguous=False,
+                ambiguity_reason="",
+                visual_flags=sorted(list((marcas_anteriores | marcas_actuales) & marcas_permitidas)),
                 technical_notes="Se observa la aparición de un cuadro de diálogo."
             )
 
-        elif (
-            is_candidate
-            and is_keyframe
-            and "cambio_interfaz_visible" in marcas_actuales
-            and "cambia_valor_visible" in acciones_validas
-        ):
+        elif "dialogo_visible" in marcas_perdidas and "desaparece_cuadro_dialogo" in acciones_validas:
             evento_detectado = crear_evento(
                 event_id=f"evt_{contador_eventos:04d}",
                 sequence_order=contador_eventos,
                 start_frame=anterior,
                 end_frame=actual,
-                event_type="cambio_interfaz",
-                observable_action="cambia_valor_visible",
-                evidence_frames=evidencia,
-                certainty=certeza,
-                is_ambiguous=True,
-                ambiguity_reason="Cambio relevante detectado sin clasificación específica del elemento de interfaz.",
-                visual_flags=flags_union,
-                technical_notes="Se detecta un cambio relevante de interfaz en un frame clave."
+                event_type="dialogo",
+                observable_action="desaparece_cuadro_dialogo",
+                evidence_frames=[anterior["frame_id"], actual["frame_id"]],
+                certainty=inferir_certeza([anterior["frame_id"], actual["frame_id"]], change_score, is_keyframe),
+                is_ambiguous=False,
+                ambiguity_reason="",
+                visual_flags=sorted(list((marcas_anteriores | marcas_actuales) & marcas_permitidas)),
+                technical_notes="El cuadro de diálogo deja de estar visible."
+            )
+
+        elif "boton_resaltado" in nuevas_marcas and "se_resalta_boton" in acciones_validas:
+            evento_detectado = crear_evento(
+                event_id=f"evt_{contador_eventos:04d}",
+                sequence_order=contador_eventos,
+                start_frame=anterior,
+                end_frame=actual,
+                event_type="cambio_control",
+                observable_action="se_resalta_boton",
+                evidence_frames=[anterior["frame_id"], actual["frame_id"]],
+                certainty=inferir_certeza([anterior["frame_id"], actual["frame_id"]], change_score, is_keyframe),
+                is_ambiguous=False,
+                ambiguity_reason="",
+                visual_flags=sorted(list((marcas_anteriores | marcas_actuales) & marcas_permitidas)),
+                technical_notes="Un botón presenta realce visual."
             )
 
         elif (
-            "cambio_interfaz_visible" in marcas_comunes
-            and change_score < 0.01
+            is_candidate
+            and change_score >= 0.20
+            and "cambio_interfaz_visible" in marcas_actuales
+            and "cambia_valor_visible" in acciones_validas
+        ):
+            certeza = inferir_certeza([anterior["frame_id"], actual["frame_id"]], change_score, is_keyframe)
+            evento_detectado = crear_evento(
+                event_id=f"evt_{contador_eventos:04d}",
+                sequence_order=contador_eventos,
+                start_frame=anterior,
+                end_frame=actual,
+                event_type="cambio_valor",
+                observable_action="cambia_valor_visible",
+                evidence_frames=[anterior["frame_id"], actual["frame_id"]],
+                certainty=certeza,
+                is_ambiguous=certeza == "baja",
+                ambiguity_reason="Cambio visible sin elemento específico claramente identificable." if certeza == "baja" else "",
+                visual_flags=sorted(list((marcas_anteriores | marcas_actuales) & marcas_permitidas)),
+                technical_notes="Se detecta un cambio visible en la interfaz."
+            )
+
+        elif (
+            "panel_visible" in marcas_comunes
+            and change_score < 0.10
             and "permanece_panel_visible" in acciones_validas
         ):
             evento_detectado = crear_evento(
@@ -221,12 +282,12 @@ def detectar_eventos_desde_frames(
                 end_frame=actual,
                 event_type="persistencia_interfaz",
                 observable_action="permanece_panel_visible",
-                evidence_frames=evidencia,
+                evidence_frames=[anterior["frame_id"], actual["frame_id"]],
                 certainty="media",
                 is_ambiguous=False,
                 ambiguity_reason="",
-                visual_flags=flags_union,
-                technical_notes="Se mantiene un estado visual de interfaz sin cambios relevantes.",
+                visual_flags=sorted(list((marcas_anteriores | marcas_actuales) & marcas_permitidas)),
+                technical_notes="El panel permanece visible sin cambios relevantes.",
                 excluded_from_steps=True
             )
 
@@ -249,8 +310,8 @@ def detectar_eventos_desde_frames(
         "generated_at": datetime.now().isoformat(timespec="seconds"),
         "event_detection_config": {
             "source_frames_index": "",
-            "event_types_version": "1.2",
-            "analysis_rules_version": "1.2",
+            "event_types_version": "1.0",
+            "analysis_rules_version": "1.0",
             "minimum_evidence_frames": 2,
             "allow_ambiguous_events": True
         },
