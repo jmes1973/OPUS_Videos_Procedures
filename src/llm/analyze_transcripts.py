@@ -111,6 +111,18 @@ def analizar_transcripcion(
     output_dir.mkdir(parents=True, exist_ok=True)
 
     segmento_id = transcript_path.stem
+    output_path = output_dir / f"{segmento_id}_informe_preliminar.md"
+
+    if output_path.exists():
+        print(f"[SKIP] Ya existe informe preliminar: {output_path.name}")
+        return {
+            "segmento_id": segmento_id,
+            "transcript_path": str(transcript_path),
+            "output_path": str(output_path),
+            "model": model,
+            "status": "skipped_existing"
+        }
+
     transcripcion = cargar_texto(transcript_path)
 
     prompt = construir_prompt_analisis(
@@ -125,14 +137,14 @@ def analizar_transcripcion(
         temperature=temperature
     )
 
-    output_path = output_dir / f"{segmento_id}_informe_preliminar.md"
     guardar_texto(output_path, informe)
 
     return {
         "segmento_id": segmento_id,
         "transcript_path": str(transcript_path),
         "output_path": str(output_path),
-        "model": model
+        "model": model,
+        "status": "created"
     }
 
 

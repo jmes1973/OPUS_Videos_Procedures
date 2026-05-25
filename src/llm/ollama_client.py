@@ -33,7 +33,7 @@ def generar_con_ollama(
     )
 
     try:
-        with request.urlopen(req, timeout=600) as response:
+        with request.urlopen(req, timeout=1800) as response:
             body = response.read().decode("utf-8")
 
     except error.URLError as e:
