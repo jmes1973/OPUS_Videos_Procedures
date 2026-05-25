@@ -60,17 +60,33 @@ def segundos_a_timestamp(segundos: float) -> str:
 def crear_plan_segmentos(
     video_id: str,
     video_path: str | Path,
-    duracion_segmento_min: float
+    duracion_segmento_min: float,
+    min_ultimo_segmento_min: float = 3.0
 ) -> list[dict[str, Any]]:
     duracion_total = obtener_duracion_video(video_path)
     duracion_segmento = duracion_segmento_min * 60
+    duracion_minima_ultimo = min_ultimo_segmento_min * 60
 
-    total_segmentos = math.ceil(duracion_total / duracion_segmento)
+    puntos_corte = [0.0]
+    actual = duracion_segmento
+
+    while actual < duracion_total:
+        puntos_corte.append(actual)
+        actual += duracion_segmento
+
+    puntos_corte.append(duracion_total)
+
+    if len(puntos_corte) >= 3:
+        duracion_ultimo = puntos_corte[-1] - puntos_corte[-2]
+
+        if duracion_ultimo < duracion_minima_ultimo:
+            puntos_corte.pop(-2)
+
     segmentos: list[dict[str, Any]] = []
 
-    for i in range(total_segmentos):
-        inicio = i * duracion_segmento
-        fin = min((i + 1) * duracion_segmento, duracion_total)
+    for i in range(len(puntos_corte) - 1):
+        inicio = puntos_corte[i]
+        fin = puntos_corte[i + 1]
 
         segmento_id = f"{video_id}_S{i + 1:02d}"
         nombre_archivo = (
@@ -99,6 +115,7 @@ def segmentar_video(
     video_path: str | Path,
     output_dir: str | Path,
     duracion_segmento_min: float = 12.0,
+    min_ultimo_segmento_min: float = 3.0,
     recomprimir: bool = False
 ) -> Path:
     video_path = Path(video_path)
@@ -110,10 +127,11 @@ def segmentar_video(
     output_dir.mkdir(parents=True, exist_ok=True)
 
     plan = crear_plan_segmentos(
-        video_id=video_id,
-        video_path=video_path,
-        duracion_segmento_min=duracion_segmento_min
-    )
+    video_id=video_id,
+    video_path=video_path,
+    duracion_segmento_min=duracion_segmento_min,
+    min_ultimo_segmento_min=min_ultimo_segmento_min
+)
 
     for segmento in plan:
         salida = output_dir / segmento["archivo_salida"]
@@ -157,6 +175,7 @@ def segmentar_video(
             "video_source": str(video_path),
             "output_dir": str(output_dir),
             "duracion_segmento_min": duracion_segmento_min,
+            "min_ultimo_segmento_min": min_ultimo_segmento_min,
             "recomprimir": recomprimir,
             "segmentos": plan
         }, f, ensure_ascii=False, indent=2)
@@ -192,6 +211,12 @@ def main() -> int:
         help="Duración aproximada de cada segmento en minutos."
     )
     parser.add_argument(
+        "--min-last-segment-min",
+        type=float,
+        default=3.0,
+        help="Duración mínima del último segmento. Si es menor, se fusiona con el anterior."
+    )
+    parser.add_argument(
         "--recompress",
         action="store_true",
         help="Recomprime los segmentos. Si no se usa, intenta cortar sin recomprimir."
@@ -201,12 +226,13 @@ def main() -> int:
 
     try:
         segmentar_video(
-            video_id=args.video_id,
-            video_path=args.input,
-            output_dir=args.output_dir,
-            duracion_segmento_min=args.segment_min,
-            recomprimir=args.recompress
-        )
+    video_id=args.video_id,
+    video_path=args.input,
+    output_dir=args.output_dir,
+    duracion_segmento_min=args.segment_min,
+    min_ultimo_segmento_min=args.min_last_segment_min,
+    recomprimir=args.recompress
+)
         return 0
 
     except Exception as e:
