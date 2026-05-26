@@ -1,0 +1,233 @@
+{
+  "project": "Volutracer OPUS User Manual",
+  "language": "es",
+  "version": "0.1",
+  "description": "Diccionario terminológico controlado para normalizar transcripciones, informes y futuros manuales de usuario de Volutracer OPUS.",
+  "terms": [
+    {
+      "canonical": "Volutracer OPUS",
+      "category": "software",
+      "definition": "Plataforma de simulación ecográfica utilizada para entrenamiento, edición, navegación y evaluación de volúmenes ecográficos.",
+      "replace_variants": [
+        "Volutracer Opus",
+        "volutracer opus",
+        "Volutracer",
+        "Opus",
+        "opus"
+      ],
+      "preferred_usage": "Usar Volutracer OPUS cuando se nombre el sistema completo. Usar OPUS solo como forma abreviada cuando el contexto ya esté claro.",
+      "confidence": "high"
+    },
+    {
+      "canonical": "archivo .STY",
+      "category": "formato_archivo_opus",
+      "definition": "Formato en el que se guardan los volúmenes ecográficos en Volutracer OPUS.",
+      "replace_variants": [
+        ".sti",
+        "STI",
+        "sti",
+        "archivo STI",
+        "archivo .STI",
+        "archivo sti"
+      ],
+      "preferred_usage": "Usar siempre archivo .STY cuando se hable del formato de guardado de volúmenes ecográficos en Volutracer OPUS.",
+      "confidence": "confirmed_by_user"
+    },
+    {
+      "canonical": "Voluson",
+      "category": "equipo_ultrasonido",
+      "definition": "Línea de equipos de ultrasonido de GE Healthcare.",
+      "replace_variants": [
+        "Volusion",
+        "volusion",
+        "Volusson",
+        "volusson",
+        "Voluzon",
+        "voluzon",
+        "Boluson",
+        "boluson"
+      ],
+      "preferred_usage": "Usar Voluson con V mayúscula.",
+      "confidence": "high"
+    },
+    {
+      "canonical": "GE Healthcare",
+      "category": "fabricante",
+      "definition": "Fabricante de equipos médicos y sistemas de ultrasonido, incluyendo la línea Voluson.",
+      "replace_variants": [
+        "GE",
+        "ge",
+        "GE health care",
+        "ge healthcare",
+        "General Electric Healthcare"
+      ],
+      "preferred_usage": "Usar GE Healthcare cuando se mencione el fabricante.",
+      "confidence": "high"
+    },
+    {
+      "canonical": "DICOM",
+      "category": "estandar_imagen_medica",
+      "definition": "Estándar internacional para almacenamiento, intercambio y gestión de imágenes médicas.",
+      "replace_variants": [
+        "Dicom",
+        "dicom",
+        "Dicon",
+        "dicon",
+        "DICOMM",
+        "dicomm"
+      ],
+      "preferred_usage": "Usar siempre DICOM en mayúsculas.",
+      "confidence": "high"
+    },
+    {
+      "canonical": "DICOMDIR",
+      "category": "archivo_dicom",
+      "definition": "Archivo índice utilizado en conjuntos DICOM para organizar estudios, series e imágenes.",
+      "replace_variants": [
+        "dicomdir",
+        "Dicomdir",
+        "DICOM DIR",
+        "Dicom Dir"
+      ],
+      "preferred_usage": "Usar DICOMDIR en mayúsculas.",
+      "confidence": "high"
+    },
+    {
+      "canonical": "GPS",
+      "category": "funcion_opus",
+      "definition": "Sistema de guía y retroalimentación de posicionamiento dentro de Volutracer OPUS.",
+      "replace_variants": [
+        "gps",
+        "G.P.S."
+      ],
+      "preferred_usage": "Usar GPS en mayúsculas.",
+      "confidence": "high"
+    },
+    {
+      "canonical": "Message GPS",
+      "category": "campo_opus",
+      "definition": "Campo o función asociada al mensaje de retroalimentación GPS mostrado o reproducido cuando el usuario alcanza una posición validada.",
+      "replace_variants": [
+        "message gps",
+        "mensaje gps",
+        "Message Gps",
+        "GPS Message"
+      ],
+      "preferred_usage": "Usar Message GPS cuando se nombre el campo técnico.",
+      "confidence": "high"
+    },
+    {
+      "canonical": "OK Text",
+      "category": "campo_opus",
+      "definition": "Texto de retroalimentación mostrado o narrado cuando una acción o vista se valida correctamente.",
+      "replace_variants": [
+        "ok text",
+        "OK text",
+        "Ok Text",
+        "texto ok",
+        "OK texto"
+      ],
+      "preferred_usage": "Usar OK Text como nombre técnico del campo.",
+      "confidence": "high"
+    },
+    {
+      "canonical": "Finish",
+      "category": "campo_opus",
+      "definition": "Parámetro que define si una vista funciona como transición o como evento evaluable/finalizable dentro del flujo del ejercicio.",
+      "replace_variants": [
+        "finish",
+        "Finish Yes",
+        "finish yes",
+        "Finish No",
+        "finish no"
+      ],
+      "preferred_usage": "Usar Finish al referirse al parámetro técnico.",
+      "confidence": "high"
+    },
+    {
+      "canonical": "Freeze",
+      "category": "comando_opus",
+      "definition": "Función de congelar la imagen, necesaria para algunas mediciones y captura de coordenadas.",
+      "replace_variants": [
+        "freeze",
+        "friz",
+        "frise",
+        "freez"
+      ],
+      "preferred_usage": "Usar Freeze como término técnico.",
+      "confidence": "high"
+    },
+    {
+      "canonical": "caliper",
+      "category": "medicion",
+      "definition": "Marcador electrónico usado para realizar mediciones sobre la imagen ecográfica.",
+      "replace_variants": [
+        "caliper",
+        "calipers",
+        "calíper",
+        "calipers"
+      ],
+      "preferred_usage": "Usar caliper en singular y calipers en plural cuando corresponda.",
+      "confidence": "high"
+    },
+    {
+      "canonical": "quiz",
+      "category": "evaluacion",
+      "definition": "Pregunta o actividad de evaluación integrada en el flujo educativo.",
+      "replace_variants": [
+        "quice",
+        "quices",
+        "cuiz",
+        "quiz"
+      ],
+      "preferred_usage": "Usar quiz para singular y quizzes para plural.",
+      "confidence": "medium"
+    },
+    {
+      "canonical": "quizzes",
+      "category": "evaluacion",
+      "definition": "Conjunto de preguntas o actividades de evaluación.",
+      "replace_variants": [
+        "quices",
+        "quizzes",
+        "quizs"
+      ],
+      "preferred_usage": "Usar quizzes como plural técnico de quiz.",
+      "confidence": "medium"
+    },
+    {
+      "canonical": "MPR",
+      "category": "imagen_3d",
+      "definition": "Reconstrucción multiplanar utilizada para visualizar cortes ortogonales o planos derivados de un volumen.",
+      "replace_variants": [
+        "mpr",
+        "Mpr"
+      ],
+      "preferred_usage": "Usar MPR en mayúsculas.",
+      "confidence": "high"
+    },
+    {
+      "canonical": "STIC",
+      "category": "imagen_4d",
+      "definition": "Técnica de adquisición volumétrica sincronizada usada en ecografía, especialmente en estudios cardíacos fetales.",
+      "replace_variants": [
+        "stic",
+        "Stic"
+      ],
+      "preferred_usage": "Usar STIC en mayúsculas.",
+      "confidence": "high"
+    },
+    {
+      "canonical": "cavum",
+      "category": "anatomia",
+      "definition": "Referencia anatómica utilizada en planos neurosonográficos, según el contexto del video.",
+      "replace_variants": [
+        "cabum",
+        "kabum",
+        "cábun"
+      ],
+      "preferred_usage": "Usar cavum cuando el contexto anatómico lo confirme.",
+      "confidence": "requires_context_review"
+    }
+  ]
+}
