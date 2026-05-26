@@ -14,6 +14,13 @@
         "Volutracer",
         "Opus",
         "opus"
+        "VoLUTracer",
+        "VoLUTracer OPUS",
+        "VoluTracer",
+        "VoluTracer OPUS",
+	"VOLUTRACER",
+	"VOLUTRACER OPUS",
+	"Volutracer Opus"
       ],
       "preferred_usage": "Usar Volutracer OPUS cuando se nombre el sistema completo. Usar OPUS solo como forma abreviada cuando el contexto ya esté claro.",
       "confidence": "high"
